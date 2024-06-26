@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import swaggerUI from 'swagger-ui-express';
 import swaggerDocs from './routes/api.docs';
+import indexRoutes from './routes/index.routes';
 
 class Server { 
     //TODO: Crear la instancia global para nuestra app.
@@ -34,6 +35,7 @@ class Server {
     //TODO: !Generar un métood para la configuración de rutas
     private routes(): void {
         this.app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+        this.app.use("/api", indexRoutes);
     }
 
     //TODO: Generar un método para inicializar el servicio.
