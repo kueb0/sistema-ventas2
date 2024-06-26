@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { indexController } from '../controllers/index.controller';
 
 class IndexRoutes {
     
@@ -10,9 +11,10 @@ class IndexRoutes {
     }
 
     config(): void{
-        this.router.get('/',(req, res) => {
-            res.send('Hola mundo');
-        });
+        this.router.get('/', indexController.index);
+        this.router.post('/', indexController.insert);
+        this.router.put('/', indexController.update);
+        this.router.delete('/', indexController.delete);
     }
 }
 const indexRoutes = new IndexRoutes();
