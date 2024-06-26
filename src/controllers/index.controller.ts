@@ -24,6 +24,7 @@ class IndexController {
 
     }
 
+
     public update(req: Request, res: Response) {
         try {
             return res.json({message: "Update Works!"});
