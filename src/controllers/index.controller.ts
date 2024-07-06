@@ -1,27 +1,45 @@
 import { Request, Response } from "express";
 import prisma from '../database/database';
+import { utils } from '../utils/utils'
+
+
 
 class IndexController {
 
     public async index(req: Request, res: Response) {
         try {
-            // ! para error 500
-            // ? throw new RangeError('Error inesperado');
-            const newUser = await prisma.usuario.create({
-                data: {
-                    nombre: 'Sandra',
-                    apellidos: 'Álvarez',
-                    username: 'karisa',
-                    password: '123'
-                }
-            });
-            const usuarios = await prisma.usuario.findMany();
-            /*const deletedUser = await prisma.usuario.delete({
-                where: { cveUsuario : newUser.cveUsuario}
-            });*/
+           // ! para error 500
+            // throw new RangeError('Error inesperado');
+            // /*
+            // const newUser = await prisma.usuario.create({
+            //     data: {
+            //         nombre: 'Ana Isabel',
+            //         apellidos: 'Jasso Velázquez',
+            //         username: 'anajasso',
+            //         password: '123'
+            //     }
+            // });
+          
+            // const deletedUser = await prisma.usuario.delete({
+            //     where: { cveUsuario: newUser.cveUsuario}
+            // });
+            //  */
 
-           // return res.json({message: "API Works!"});
-           return res.json(usuarios);
+            // const user = {
+            //     cveUsuario : 1,
+            //     nombre: 'Ana Isabel',
+            //     rol: [1,2,3]
+            // };
+
+            // const token = utils.generateJWT(user);
+            // console.log(token);
+            
+            // var jwt = "";
+            // var data = utils.getPayload(jwt);
+            // console.log(data);
+           // const usuarios = await prisma.usuario.findMany();
+           //return res.json(usuarios);
+           return res.json({message: "API Works!"});
 
         } catch (error: any) {
             return res.status(500).json({ message: `Error: ${error.message}`});
