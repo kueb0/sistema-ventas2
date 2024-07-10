@@ -13,51 +13,51 @@ import bcrypt from 'bcryptjs';
 class Utils {
 
     /*****************************************************
-         * @name generateJWT
-         * @description Metodo para generar un token OAUTH
-         * @param payload
-         * @returns string 
-         *****************************************************/
-    public generateJWT(payload: any): string { 
-        var token = jwt.sign(payload, keys.secret.jwt, { expiresIn: '1h'});
+     * @name generateJWT
+     * @description Metodo para generar un token OAUTH
+     * @param payload
+     * @returns string 
+     *****************************************************/
+    public generateJWT(payload: any): string {
+        var token = jwt.sign(payload, keys.secret.jwt, { expiresIn: '1h' });
 
         return token;
     }
 
-        /*****************************************************
-         * @name getPayload
-         * @description Obtener la información del JWT
-         * @param token
-         * @returns Object 
-         *****************************************************/
+    /*****************************************************
+     * @name getPayload
+     * @description Obtener la información del JWT
+     * @param token
+     * @returns Object 
+     *****************************************************/
 
-    public getPayload(token: string): any { 
+    public getPayload(token: string): any {
         var payload = <any>jwt.verify(token, keys.secret.jwt);
         const { iat, exp, ...data } = payload;
 
         return data;
     }
 
-            /*****************************************************
-         * @name hashPassword
-         * @description Encriptar cadena de texto
-         * @param password
-         * @returns String 
-         *****************************************************/
-    public async hashPassword(password: string): Promise <string> {
+    /*****************************************************
+ * @name hashPassword
+ * @description Encriptar cadena de texto
+ * @param password
+ * @returns String 
+ *****************************************************/
+    public async hashPassword(password: string): Promise<string> {
         const salt = await bcrypt.genSaltSync(10);
         return await bcrypt.hashSync(password, salt);
     }
 
-                /*****************************************************
-         * @name ckeckPassword
-         * @description Verificar la contraseña
-         * @param password
-         * @returns String 
-         *****************************************************/
-    public async checkPassword(password: string, encryptedPassword: string): Promise <boolean> {
+    /*****************************************************
+* @name ckeckPassword
+* @description Verificar la contraseña
+* @param password
+* @returns String 
+*****************************************************/
+    public async checkPassword(password: string, encryptedPassword: string): Promise<boolean> {
         return await bcrypt.compareSync(password, encryptedPassword);
-    } 
+    }
 }
 
 export const utils = new Utils();

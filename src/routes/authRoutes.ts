@@ -22,8 +22,6 @@ class AuthRoutes {
      *          password:
      *              type: string
      */
-
-
     config(){
         /**
          * @swagger
