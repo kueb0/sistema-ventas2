@@ -1,9 +1,6 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode ="push">
-        <ul>
-            <li>Lista 1</li>
-            <li>Lista 2</li>
-        </ul>
+        <app-sidebar></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content>
         <app-header (toggleSidenav)="sidenav.toggle()"></app-header>
@@ -12,4 +9,10 @@
     </mat-sidenav-content>
 </mat-sidenav-container>
 
+<ngx-spinner 
+bdColor = "rgba(0, 0, 0, 0.8)" 
+size = "default" 
+color = "#fff" 
+type = "line-spin-fade-rotating"
+[fullScreen] = "true"></ngx-spinner>
 

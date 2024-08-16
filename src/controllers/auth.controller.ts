@@ -5,6 +5,8 @@ import { utils } from "../utils/utils";
 class AuthController {
     public async iniciarSesion(req: Request, response: Response){
         try {
+            //Test 
+            //await this.sleep(2000);
 
             var temp = await utils.hashPassword("admin");
             console.log(temp);
@@ -50,6 +52,12 @@ class AuthController {
             console.log(error)
             return response.status(500).json({message: "Error interno"});
         }
+    }
+
+    sleep(ms: number){
+        return new Promise ( (resolve) => {
+            setTimeout(resolve, ms);
+        });
     }
 }
 

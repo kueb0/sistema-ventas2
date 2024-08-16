@@ -1,0 +1,80 @@
+<h1 mat-dialog-title>Usuario</h1>
+<mat-dialog-content>
+    <form [formGroup]="userForm" (submit)="onSave()">
+        <!-- nombre -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" formControlName="nombre" matInput>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('nombre'))}}
+            </mat-error>
+        </mat-form-field>
+        <!-- apellidos-->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input type="text" formControlName="apellidos" matInput>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('apellidos'))}}
+            </mat-error>
+        </mat-form-field>
+        <!--username-->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Usuario</mat-label>
+            <input type="text" formControlName="username" matInput>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('username'))}}
+            </mat-error>
+        </mat-form-field>
+        <!-- correo -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Correo electrónico</mat-label>
+            <input type="email" formControlName="email" matInput>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('email'))}}
+            </mat-error>
+        </mat-form-field>
+        <!-- rol -->
+        <mat-form-field>
+            <mat-label>Rol(es)</mat-label>
+            <mat-select formControlName="rol" multiple>
+                <mat-option value="1">Administrador</mat-option>
+                <mat-option value="2">Ventas</mat-option>
+                <mat-option value="3">Reportes</mat-option>
+            </mat-select>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('rol'))}}
+            </mat-error>
+        </mat-form-field>
+        <!-- password -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input type="email" formControlName="password" matInput>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('password'))}}
+            </mat-error>
+        </mat-form-field>
+        <!-- confirmPassword -->
+        <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Repetir contraseña</mat-label>
+            <input type="email" formControlName="confirmPassword" matInput>
+            <mat-error>
+                {{ baseForm.getErrorMessage(userForm.get('confirmPassword'))}}
+            </mat-error>
+        </mat-form-field>
+
+        <div align="center">
+            <button type="button" mat-flat-button color="warn" class="me-2">
+                Limpiar
+            </button>
+            <button type="submit" mat-flat-button color="primary">
+                {{ titleButton }}
+            </button>
+        </div>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>
+        Cerrar
+    </button>
+</mat-dialog-actions>
