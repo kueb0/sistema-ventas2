@@ -25,45 +25,37 @@
                 {{ baseForm.getErrorMessage(userForm.get('username'))}}
             </mat-error>
         </mat-form-field>
-        <!-- correo -->
-        <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Correo electrónico</mat-label>
-            <input type="email" formControlName="email" matInput>
-            <mat-error>
-                {{ baseForm.getErrorMessage(userForm.get('email'))}}
-            </mat-error>
-        </mat-form-field>
         <!-- rol -->
-        <mat-form-field>
+        <mat-form-field class="full-width" appearance="outline">
             <mat-label>Rol(es)</mat-label>
-            <mat-select formControlName="rol" multiple>
-                <mat-option value="1">Administrador</mat-option>
-                <mat-option value="2">Ventas</mat-option>
-                <mat-option value="3">Reportes</mat-option>
+            <mat-select formControlName="cveRol">
+                <mat-option *ngFor="let rol of roles" [value]="rol.cveRol">
+                    {{ rol.descripcion + ' - ' + rol.clave }}
+                </mat-option>
             </mat-select>
             <mat-error>
-                {{ baseForm.getErrorMessage(userForm.get('rol'))}}
+                {{ baseForm.getErrorMessage(userForm.get('cveRol'))}}
             </mat-error>
         </mat-form-field>
         <!-- password -->
-        <mat-form-field class="full-width" appearance="outline">
+        <mat-form-field *ngIf="actionTODO == 'new'" class="full-width" appearance="outline">
             <mat-label>Contraseña</mat-label>
-            <input type="email" formControlName="password" matInput>
+            <input type="password" formControlName="password" matInput>
             <mat-error>
                 {{ baseForm.getErrorMessage(userForm.get('password'))}}
             </mat-error>
         </mat-form-field>
         <!-- confirmPassword -->
-        <mat-form-field class="full-width" appearance="outline">
+        <mat-form-field *ngIf="actionTODO == 'new'" class="full-width" appearance="outline">
             <mat-label>Repetir contraseña</mat-label>
-            <input type="email" formControlName="confirmPassword" matInput>
+            <input type="password" formControlName="confirmPassword" matInput>
             <mat-error>
                 {{ baseForm.getErrorMessage(userForm.get('confirmPassword'))}}
             </mat-error>
         </mat-form-field>
 
         <div align="center">
-            <button type="button" mat-flat-button color="warn" class="me-2">
+            <button type="button" mat-flat-button color="warn" class="me-2" (click)="onClear()">
                 Limpiar
             </button>
             <button type="submit" mat-flat-button color="primary">

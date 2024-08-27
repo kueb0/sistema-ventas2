@@ -30,7 +30,7 @@ class IndexRoutes {
          *          200:
          *              description: Exitoso
          */
-        this.router.get('/', [validate, jwtCheck], indexController.index);
+        this.router.get('/', indexController.index);
        /** 
          * @swagger
          * /api:

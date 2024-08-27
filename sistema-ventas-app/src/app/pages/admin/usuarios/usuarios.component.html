@@ -26,7 +26,7 @@
         <!--rol(es)-->
         <ng-container matColumnDef="rol">
             <th mat-header-cell *matHeaderCellDef>Rol(es)</th>
-            <td mat-cell *matCellDef="let element">{{ element.rol }}</td>
+            <td mat-cell *matCellDef="let element">{{ element.rol.descripcion }}</td>
         </ng-container>
         <!--Acciones(editar, eliminar)-->
         <ng-container matColumnDef="acciones">
@@ -36,7 +36,7 @@
                     <mat-icon>edit</mat-icon>
                     Editar
                 </button>
-                <button mat-flat-button color="warn">
+                <button mat-flat-button color="warn" (click)="onDelete(element.cveUsuario)">
                     <mat-icon>delete</mat-icon>
                     Eliminar
                 </button>

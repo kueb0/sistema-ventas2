@@ -8,8 +8,9 @@ export class BaseForm {
 
     isValidfield(form: AbstractControl | null): boolean {
         var bandera = false;
+
         if (form)
-            form.touched || form.dirty && form.invalid;
+            bandera = form.touched || form.dirty && form.invalid;
 
         return bandera; 
     }

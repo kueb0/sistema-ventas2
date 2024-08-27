@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Usuario } from '../../../shared/models/usuario.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { UsuarioDialogComponent } from './components/usuario-dialog/usuario-dialog.component';
+import { Subject, takeUntil } from 'rxjs';
+import { UsuariosService } from './services/usuarios.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -12,24 +14,30 @@ import { UsuarioDialogComponent } from './components/usuario-dialog/usuario-dial
 })
 export class UsuariosComponent implements OnInit, OnDestroy, AfterViewInit {
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private usuarioSvc: UsuariosService) {
     
   }
 
-
+  private destroy$ = new Subject();
   dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: String[] = ['nombre', 'apellidos', 'username', 'rol', 'acciones'];
 
-  usuarios: Usuario[] = [
-    {cveUsuario: 1, nombre: 'Sandra', apellidos: 'Alvarez', username: 'karisa', rol: 'admin'},
-    {cveUsuario: 2, nombre: 'Karina', apellidos: 'Gonzalez', username: 'hola', rol: 'ventas'}
-  ]
+  // usuarios: Usuario[] = [
+  //   {cveUsuario: 1, nombre: 'Sandra', apellidos: 'Alvarez', username: 'karisa'},
+  //   {cveUsuario: 2, nombre: 'Karina', apellidos: 'Gonzalez', username: 'hola'}
+  // ]
 
   ngOnInit(): void {
-      this.dataSource.data= this.usuarios;
+      this.listar();
   }
 
+  listar(){
+    this.usuarioSvc.listarUsuarios().pipe(takeUntil(this.destroy$)).subscribe((usuarios: Usuario[]) => {
+      this.dataSource.data = usuarios;
+    });
+  }
+  
   ngAfterViewInit(): void {
       this.dataSource.paginator = this.paginator;
   }
@@ -41,10 +49,27 @@ export class UsuariosComponent implements OnInit, OnDestroy, AfterViewInit {
       data: {
         user
       }
-    })
+    });
+
+    dialogRef.afterClosed()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe( result => {
+      if (result) {
+        this.listar();
+      }
+    });
+  }
+
+  onDelete(cveUsuario: number) {
+    this.usuarioSvc.eliminarUsuario(cveUsuario).pipe(takeUntil(this.destroy$))
+    .subscribe( (result: Usuario) => {
+      this.listar();
+  });
   }
 
   ngOnDestroy(): void {
-      
+      this.destroy$.next({});
+      this.destroy$.complete();
   }
+  
 }

@@ -45,6 +45,7 @@ class AuthRoutes {
          */
         
         this.router.post("/", authRules(), [validate], authController.iniciarSesion); 
+        
     }
 }
 

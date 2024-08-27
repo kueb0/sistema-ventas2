@@ -3,6 +3,7 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+//  url = "mysql://admin:63S7iKv9_O@sistema-ventas-db-s.c3ywamkemedu.us-east-2.rds.amazonaws.com:3307/sistema_ventas_db"
 
 generator client {
   provider = "prisma-client-js"
@@ -20,6 +21,18 @@ model Usuario {
   username String @db.VarChar(150)
   password String @db.VarChar(800)
   fechaRegistro DateTime @default(now())
+  rol Rol @relation(fields: [cveRol], references: [cveRol])
+  cveRol Int
 
   @@map("tbl_usuario")
+}
+
+model Rol {
+  cveRol Int @id @default(autoincrement())
+  descripcion String @db.VarChar(255)
+  clave String @db.VarChar(50)
+  activo Boolean @default(true)
+
+  Usuario Usuario[]
+  @@map("rol")
 }

@@ -10,6 +10,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './shared/interceptors/loading.interceptor';
+import { tokenInterceptor } from './shared/interceptors/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { loadingInterceptor } from './shared/interceptors/loading.interceptor';
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(
-      withInterceptors([loadingInterceptor])
+      withInterceptors([loadingInterceptor, tokenInterceptor])
     )
   ],
   bootstrap: [AppComponent]
