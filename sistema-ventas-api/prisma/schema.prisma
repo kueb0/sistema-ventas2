@@ -3,7 +3,7 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-//  url = "mysql://admin:63S7iKv9_O@sistema-ventas-db-s.c3ywamkemedu.us-east-2.rds.amazonaws.com:3307/sistema_ventas_db"
+
 
 generator client {
   provider = "prisma-client-js"
@@ -11,8 +11,8 @@ generator client {
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
-}
+  url = "mysql://admin:63S7iKv9_P@sistema-ventas-bdsandra.c3ywamkemedu.us-east-2.rds.amazonaws.com:3306/sistema_ventas_db"
+  }
 
 model Usuario {
   cveUsuario Int @id @default(autoincrement())

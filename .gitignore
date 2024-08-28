@@ -1,6 +1,0 @@
-node_modules
-
-build 
-#Eliminar antes de subir a github
-
-.env

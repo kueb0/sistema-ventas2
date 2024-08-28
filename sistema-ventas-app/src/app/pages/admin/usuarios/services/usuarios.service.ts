@@ -27,7 +27,7 @@ export class UsuariosService {
   }
 
   actualizarUsuario(user: Usuario): Observable <Usuario> {
-    return this.http.put<Usuario>(`${environment.API_URL}/usuarios/`, user, {headers: {"requireToken": "true"}}).pipe(catchError((error) => this.handlerError(error)));
+    return this.http.put<Usuario>(`${environment.API_URL}/usuarios`, user, {headers: {"requireToken": "true"}}).pipe(catchError((error) => this.handlerError(error)));
 }
 
   eliminarUsuario(cveUsuario: number): Observable <Usuario> {
