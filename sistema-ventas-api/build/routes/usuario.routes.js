@@ -16,7 +16,7 @@ class UsuarioRoutes {
         // insercion
         this.router.post('/', (0, usuario_rules_1.insertRules)(), [validator_check_1.validate], usuario_controller_1.usuarioController.insertar);
         // actualizar
-        this.router.put('/', (0, usuario_rules_1.updateRules)(), [validator_check_1.validate], usuario_controller_1.usuarioController.actualizar);
+        this.router.put('/', (0, usuario_rules_1.updateRules)(), usuario_controller_1.usuarioController.actualizar);
         //eliminar
         this.router.delete('/:cveUsuario', usuario_controller_1.usuarioController.eliminar);
     }
